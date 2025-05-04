@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-title: 'Uncial Antiqua', cursive;
 }
 
 @theme inline {
@@ -23,4 +24,55 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ajoute une texture de fond et un fond "parchemin" */
+.bg-parchment {
+  background-color: #f5f0dc;
+  background-image: url('/texture-parchment.webp');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+/* Facultatif si tu veux une version sans image : */
+.bg-texture {
+  background-color: #f5f0dc;
+}
+
+h1, h2, h3, .title {
+  font-family: var(--font-title);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #b7791f;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==== TITRES ADAPTATIFS ==== */
+h1 {
+  @apply text-xl sm:text-2xl md:text-3xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-lg sm:text-xl md:text-2xl font-semibold mb-3;
+}
+
+h3 {
+  @apply text-base sm:text-lg font-semibold mb-2;
+}
+
+/* ==== TEXTE ADAPTATIF PAR DÉFAUT ==== */
+p, li {
+  @apply text-sm sm:text-base leading-snug sm:leading-normal;
 }
