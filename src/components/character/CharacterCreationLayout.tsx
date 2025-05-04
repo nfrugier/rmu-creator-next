@@ -21,7 +21,7 @@ export default function CharacterCreationLayout() {
   /*Effets d'ui*/
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [stepKey, setStepKey] = useState(Date.now()); // force le remount pour l'effet fade
+  //const [stepKey, setStepKey] = useState(Date.now()); // force le remount pour l'effet fade
 
 
   const [character, setCharacter] = useState<Character>({
@@ -133,8 +133,10 @@ export default function CharacterCreationLayout() {
               const link = document.createElement("a");
               link.href = url;
               const name = character.name?.trim().replace(/\s+/g, "_") || "personnage";
-              const date = new Date().toISOString().split("T")[0];
-              link.download = `${name}-export-${date}.json`;
+              const date = new Date().toISOString();
+              const datePart = date.split("T")[0];
+              const timePart = date.split("T")[1].split(".")[0].replace(/:/g, "-");
+              link.download = `${name}-export-${datePart}-${timePart}.json`;
               link.click();
               URL.revokeObjectURL(url);
             }}

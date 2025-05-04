@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
+import type { Character } from "@/types/character";
+
 
 const races = ["Humain", "Elfe", "Nain", "Hobbit"];
 const cultures = ["Urbaine", "Rurale", "Sylvestre", "Nomade"];
 
 export default function RaceCultureStep({ character, setCharacter, onNext }: {
   character: { race: string; culture: string };
-  setCharacter: (c: any) => void;
+  setCharacter: (updater: (prev: Character) => Character) => void;
   onNext: () => void;
 }) {
 

@@ -27,12 +27,16 @@ export default function CharacterSummary({ character }: { character: Character }
         <div className="flex-1 space-y-4">
           <h3 className="font-semibold">Caractéristiques</h3>
           <ul className="list-disc list-inside space-y-1">
-            {Object.entries(character.stats.current).map(([key, value]) => (
-              <li key={key}>
-                {key} : {value}
-                <span className="text-xs text-gray-500"> / {character.stats.potential[key]}</span>
-              </li>
-            ))}
+            {character.stats &&
+              Object.entries(character.stats.current).map(([key, value]) => (
+                <li key={key}>
+                  {key} : {value}
+                  <span className="text-xs text-gray-500">
+                    {" "}
+                    / {character.stats?.potential?.[key] ?? "?"}
+                  </span>
+                </li>
+              ))}
           </ul>
         </div>
       )}
