@@ -4,16 +4,34 @@ import type { Talent } from "@/types/talents";
 import { Check } from "lucide-react";
 
 const mockTalents: Talent[] = [
-  { name: "Vision Nocturne", description: "Peut voir dans l'obscurité.", cost: 2 },
-  { name: "Chanceux", description: "Peut relancer un jet critique par jour.", cost: 3 },
-  { name: "Résistance magique", description: "Bonus contre les sorts hostiles.", cost: 1 },
+  { name: "Vision Nocturne", description: "Peut voir clairement dans une obscurité totale jusqu'à 30 mètres.", cost: 2 },
+  { name: "Chanceux", description: "Peut relancer un jet d’échec critique une fois par jour.", cost: 3 },
+  { name: "Résistance magique", description: "Bonus de +10 contre les sorts hostiles.", cost: 1 },
+  { name: "Ambidextre", description: "N’applique pas de malus à l’utilisation de la main non dominante.", cost: 2 },
+  { name: "Rapide", description: "+10 à l’initiative et à la vitesse de déplacement.", cost: 2 },
+  { name: "Mémoire Eidétique", description: "Souvenir précis de tout ce qui a été lu ou vu récemment.", cost: 3 },
+  { name: "Langage Naturel", description: "+25 en apprentissage des langues.", cost: 1 },
+  { name: "Perception Aiguisée", description: "+10 aux tests de perception visuelle et auditive.", cost: 2 },
+  { name: "Volonté de Fer", description: "+15 contre les effets mentaux ou de peur.", cost: 2 },
+  { name: "Sang-froid", description: "Immunisé à la panique et au choc de combat.", cost: 1 },
 ];
 
+
 const mockFlaws: Talent[] = [
-  { name: "Boiteux", description: "Vitesses réduites.", cost: -2 },
-  { name: "Arrogant", description: "Malus aux interactions sociales.", cost: -1 },
-  { name: "Sensible à la lumière", description: "Malus en plein jour.", cost: -2 },
+  { name: "Boiteux", description: "Vitesses de déplacement réduites de moitié.", cost: -2 },
+  { name: "Arrogant", description: "Malus de -10 à toutes les interactions sociales.", cost: -1 },
+  { name: "Sensible à la lumière", description: "Malus de -15 en plein soleil.", cost: -2 },
+  { name: "Névrosé", description: "Jet de peur requis dans toute situation stressante.", cost: -2 },
+  { name: "Anémie", description: "Moins de points de vie ; récupération ralentie.", cost: -1 },
+  { name: "Entêté", description: "Refuse souvent les ordres ; malus social contextuel.", cost: -1 },
+  { name: "Sommeil Léger", description: "Facilement réveillé ; repos moins efficace.", cost: -1 },
+  { name: "Voix Grave ou Aigüe", description: "Malus en diplomatie, chant, etc.", cost: -1 },
+  { name: "Mains Tremblantes", description: "Malus de -10 aux actions de précision.", cost: -2 },
+  { name: "Peur du feu", description: "Jet de panique à proximité de flammes.", cost: -2 },
 ];
+
+const MAX_TALENT_COST = 6;
+
 
 type TalentStepProps = {
   character: Character;
@@ -22,15 +40,24 @@ type TalentStepProps = {
 };
 
 export default function TalentStep({ character, setCharacter, onNext }: TalentStepProps) {
-  const baseTDP = character.tdp || 0;
   const [selected, setSelected] = useState<Talent[]>([
     ...(character.talents || []),
     ...(character.flaws || []),
   ]);
   
+  const totalTalentCost = selected
+    .filter((t) => t.cost > 0)
+    .reduce((sum, t) => sum + t.cost, 0);
 
-  const totalUsed = selected.reduce((sum, t) => sum + t.cost, 0);
-  const remaining = baseTDP - totalUsed;
+  const totalFlawBonus = selected
+    .filter((t) => t.cost < 0)
+    .reduce((sum, t) => sum + t.cost, 0); // total négatif
+
+  const effectiveTDP = (character.tdp || 0) + Math.abs(totalFlawBonus);
+
+  /*const totalUsed = selected.reduce((sum, t) => sum + t.cost, 0);*/
+  const remaining = effectiveTDP - totalTalentCost;
+
 
   const toggleTalent = (talent: Talent) => {
     setSelected((prev) =>
@@ -49,7 +76,8 @@ export default function TalentStep({ character, setCharacter, onNext }: TalentSt
     onNext();
   };
 
-  //const isValid = remaining >= 0;
+  /*const isValid = totalTalentCost <= MAX_TALENT_COST && remaining >= 0;*/
+
 
   return (
     <div>
@@ -67,10 +95,18 @@ export default function TalentStep({ character, setCharacter, onNext }: TalentSt
       </div>
 
       <p className="mb-4 text-sm text-(--foreground)">
-        Points de talents disponibles : <strong>{baseTDP}</strong><br />
-        Total utilisé : <strong className={remaining < 0 ? "text-red-500" : ""}>{totalUsed}</strong><br />
-        Restant : <strong className={remaining < 0 ? "text-red-500" : "text-green-600"}>{remaining}</strong>
+        TDP raciaux : <strong>{character.tdp}</strong><br />
+        Bonus de flaws : <strong className="text-green-700">{Math.abs(totalFlawBonus)}</strong><br />
+        <span className="text-(--foreground)">TDP disponibles : </span>
+        <strong>{effectiveTDP}</strong> (max 6 utilisés dans les talents)<br />
+        Coût actuel des talents :{" "}
+        <strong className={totalTalentCost > MAX_TALENT_COST ? "text-red-500" : ""}>
+          {totalTalentCost}
+        </strong><br />
+        TDP restants :{" "}
+        <strong className={remaining < 0 ? "text-red-500" : "text-green-600"}>{remaining}</strong>
       </p>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
