@@ -7,12 +7,15 @@ import ProfessionStep from "./ProfessionStep";
 import CharacterSummary from "./CharacterSummary";
 import type { Character } from "@/types/character";
 import ConfirmDialog from "../ui/ConfirmDialog";
+import SkillStep from "./SkillStep";
+
 
 
 const steps = [
   { label: "Race & Culture", key: "race" },
   { label: "Caractéristiques", key: "stats" },
   { label: "Profession", key: "profession" },
+  { label: "Compétences", key: "skills" },
 ];
 
 export default function CharacterCreationLayout() {
@@ -57,7 +60,15 @@ export default function CharacterCreationLayout() {
           <ProfessionStep
             character={character}
             setCharacter={setCharacter}
-            onNext={() => goToStep(2)} // ou future étape
+            onNext={() => goToStep(3)}
+          />
+        );
+      case 3:
+        return (
+          <SkillStep
+            character={character}
+            setCharacter={setCharacter}
+            onNext={() => goToStep(3)}
           />
         );
       default:
@@ -122,7 +133,7 @@ export default function CharacterCreationLayout() {
         <h2 className="text-lg font-bold mb-2 text-center">Résumé</h2>
         <CharacterSummary character={character} />
       </div>
-      {character.race && character.culture && character.stats && character.profession && (
+      {character.race && character.culture && character.stats && character.profession && character.skills && (
         <div className="fixed top-14 right-11 flex flex-col gap-3 z-50">
           <button
             onClick={() => {

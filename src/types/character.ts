@@ -1,3 +1,6 @@
+import type { SkillSelection } from "./skills";
+import type { SkillCosts } from "./skills";
+
 export type StatBlock = Record<string, number>;
 
 export type Character = {
@@ -15,5 +18,8 @@ export type Character = {
   };
   profession: string;
   realm: string;
+  availableDP?: number;
+  skills?: SkillSelection;
+  skillCosts?: SkillCosts;
 };
 
