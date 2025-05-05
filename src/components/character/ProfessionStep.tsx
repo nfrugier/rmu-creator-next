@@ -378,7 +378,7 @@ export default function ProfessionStep({
                   selected === p.name
                     ? "border-yellow-600 bg-yellow-900 text-white"
                     : "border-gray-300 bg-white text-black"
-                } hover:border-yellow-400 transition`}
+                } hover:border-yellow-400 hover:bg-yellow-200 hover:text-black transition`}
               >
                 <strong>{p.name}</strong>
                 <p className="text-sm">{p.description}</p>
@@ -387,7 +387,7 @@ export default function ProfessionStep({
           </div>
         </div>
       ))}
-      <div className=" text-center pt-4">
+      <div className="fixed bottom-1/12 left-1/7 flex flex-col gap-3 z-50 text-center pt-4">
         <button
           onClick={onNext}
           disabled={!selected}

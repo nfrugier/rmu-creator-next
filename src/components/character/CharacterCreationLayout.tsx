@@ -160,9 +160,9 @@ export default function CharacterCreationLayout() {
       <div className="fixed top-14 left-10 flex flex-col gap-3 z-50">
         <button
           onClick={() => setShowResetConfirm(true)}
-          className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded shadow-lg"
+          className="text-sm text-(--foreground) px-3 py-1 rounded border border-red-500 hover:bg-red-800 bg-red-600 hover:border-red-700 transition-colors duration-200"
         >
-          ♻️ Réinitialiser
+          Réinitialiser
         </button>
       </div>
       {showResetConfirm && (
