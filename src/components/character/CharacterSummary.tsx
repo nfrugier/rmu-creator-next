@@ -19,7 +19,7 @@ export default function CharacterSummary({ character }: { character: Character }
         <div>
           <h3 className="font-semibold">Profession</h3>
           <p>{character.profession || <em>Non définie</em>}</p>
-          {character.realm && <p className="text-xs text-gray-600">({character.realm})</p>}
+          {character.realm && <p className="text-xs text-(--foreground)/50">({character.realm})</p>}
         </div>
       </div>
 
@@ -31,7 +31,7 @@ export default function CharacterSummary({ character }: { character: Character }
               Object.entries(character.stats.current).map(([key, value]) => (
                 <li key={key}>
                   {key} : {value}
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-(--foreground)/50">
                     {" "}
                     / {character.stats?.potential?.[key] ?? "?"}
                   </span>

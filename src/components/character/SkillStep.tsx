@@ -55,7 +55,7 @@ export default function SkillStep({
           Object.entries(character.skillCosts).map(([group, [cost1, cost2]]) => (
             <div key={group} className="flex justify-between items-center border-b pb-2">
               <div className="w-1/3">{group}</div>
-              <div className="w-1/3 text-sm text-gray-400">{cost1} / {cost2}</div>
+              <div className="w-1/3 text-sm text-(--foreground)/50">{cost1} / {cost2}</div>
               <div className="w-1/3 flex items-center justify-end gap-2">
                 {[0, 1, 2].map((val) => (
                   <button
@@ -64,7 +64,7 @@ export default function SkillStep({
                     className={`px-2 py-1 rounded ${
                       skills[group] === val
                         ? "bg-yellow-600 text-white"
-                        : "bg-gray-200 hover:bg-gray-300"
+                        : "bg-(--foreground) hover:bg-(--background) hover:text-(--foreground) border-1 border-transparent hover:border-yellow-600 text-(--background)"
                     }`}
                   >
                     {val}

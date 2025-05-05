@@ -376,9 +376,9 @@ export default function ProfessionStep({
                 onClick={() => handleSelect(p.name)}
                 className={`cursor-pointer p-3 rounded border-2 ${
                   selected === p.name
-                    ? "border-indigo-600 bg-indigo-900 text-white"
+                    ? "border-yellow-600 bg-yellow-900 text-white"
                     : "border-gray-300 bg-white text-black"
-                } hover:border-indigo-400 transition`}
+                } hover:border-yellow-400 transition`}
               >
                 <strong>{p.name}</strong>
                 <p className="text-sm">{p.description}</p>

@@ -106,7 +106,7 @@ export default function CharacterCreationLayout() {
               onClick={() => setActiveStep(i)}
               className={`px-4 py-2 rounded border-2 ${
                 activeStep === i
-                  ? "bg-indigo-600 text-white border-indigo-600"
+                  ? "bg-yellow-700 text-white border-yellow-600"
                   : "bg-white text-gray-800 border-gray-400"
               }`}
             >

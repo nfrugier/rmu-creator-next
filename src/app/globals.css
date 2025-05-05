@@ -2,27 +2,21 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --secondary-background: #ececec;
+  --foreground: #36393e;
   --font-title: 'Uncial Antiqua', cursive;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ededed;
-    --foreground: #0a0a0a;
+    --background: #36393e;
+    --secondary-background: #7a7c7f;
+    --foreground: #ffffff;
   }
 }
 
@@ -39,8 +33,8 @@ body {
 
 /* Ajoute une texture de fond et un fond "parchemin" */
 .bg-parchment {
-  background-color: #f5f0dc;
-  background-image: url('/texture-parchment.webp');
+  background-color: var(--secondary-background);
+  /*background-image: url('/texture-parchment.webp');*/
   background-size: cover;
   background-repeat: repeat;
 }
