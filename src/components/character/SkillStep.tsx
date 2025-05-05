@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import type { Character } from "@/types/character";
 import type { SkillSelection } from "@/types/skills";
+import { Check } from "lucide-react";
 
 const MAX_DP = 50;
 
@@ -48,7 +49,17 @@ export default function SkillStep({
 
   return (
     <div className="text-(--foreground)">
-      <h2 className="text-xl font-bold mb-4">Répartition des compétences</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-bold">Répartition des compétences</h2>
+        <button
+          onClick={handleNext}
+          className="w-9 h-9 flex items-center justify-center rounded-full
+          border-2 border-yellow-500 bg-(--background) text-(--foreground) hover:bg-yellow-700 hover:border-yellow-500
+          disabled:border-gray-300 disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+        >
+          <Check className="w-5 h-5" strokeWidth={2.5} />
+        </button>
+      </div>
       <p className="mb-2">DP restants : {availableDP}</p>
       <div className="space-y-4">
         {character.skillCosts &&
@@ -73,15 +84,6 @@ export default function SkillStep({
               </div>
             </div>
           ))}
-      </div>
-
-      <div className="mt-6 text-right">
-        <button
-          onClick={handleNext}
-          className="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded"
-        >
-          Étape suivante
-        </button>
       </div>
     </div>
   );

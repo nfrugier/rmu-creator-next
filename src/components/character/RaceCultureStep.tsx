@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { Character } from "@/types/character";
+import { Check } from "lucide-react";
 
 
 const races = ["Humain", "Elfe", "Nain", "Hobbit"];
@@ -59,6 +60,9 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
     },
   };
 
+  const isValid = !!character.race && !!character.culture;
+
+
   const handleRaceChange = (race: string) => {
     setCharacter((prev: Character) => ({
       ...prev,
@@ -83,7 +87,23 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
 
   return (
     <div className="text-(--foreground)">
-      <div className="mb-4 ">
+      <div className="flex justify-between items-center mb-4 ">
+        <h2 className="text-xl font-bold">Choix de la race et de la culture</h2>
+        <button
+          onClick={onNext}
+          disabled={!isValid}
+          className={`w-9 h-9 flex items-center justify-center rounded-full border-2 transition-colors
+            ${isValid
+              ? "bg-yellow-700 border-yellow-500 text-white"
+              : "bg-[--background] text-[--foreground] hover:bg-yellow-700 hover:border-yellow-500"}
+            ${!isValid ? "disabled:border-gray-300 disabled:bg-gray-200 disabled:text-gray-400" : ""}
+          `}
+        >
+          <Check className="w-5 h-5" strokeWidth={2.5} />
+        </button>
+
+      </div>
+      <div>
         <label className="block font-semibold mb-1">Race</label>
         <select
           value={character.race}
@@ -131,14 +151,6 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
           <p><strong>Compétences bonus :</strong> {cultureEffects[character.culture]?.skills.join(", ")}</p>
         </div>
       )}
-
-      <button
-        onClick={onNext}
-        disabled={!character.race || !character.culture}
-        className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded disabled:opacity-50"
-      >
-        ✅ Valider et continuer
-      </button>
     </div>
   );
 }

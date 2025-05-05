@@ -8,7 +8,7 @@ import CharacterSummary from "./CharacterSummary";
 import type { Character } from "@/types/character";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import SkillStep from "./SkillStep";
-
+import { RefreshCcw, FileDown  } from "lucide-react";
 
 
 const steps = [
@@ -104,7 +104,7 @@ export default function CharacterCreationLayout() {
             <button
               key={step.key}
               onClick={() => setActiveStep(i)}
-              className={`px-4 py-2 rounded border-2 ${
+              className={`px-4 py-2 rounded-3xl border-2 ${
                 activeStep === i
                   ? "bg-yellow-700 text-white border-yellow-600"
                   : "bg-white text-gray-800 border-gray-400"
@@ -151,18 +151,18 @@ export default function CharacterCreationLayout() {
               link.click();
               URL.revokeObjectURL(url);
             }}
-            className="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded shadow-lg"
+            className="rounded-full bg-green-600 text-white hover:bg-green-800 w-10 h-10 flex items-center justify-center"
           >
-            📄 Exporter
+            <FileDown className="w-5 h-5" strokeWidth={3} />
           </button>
         </div>
       )}
       <div className="fixed top-14 left-10 flex flex-col gap-3 z-50">
         <button
           onClick={() => setShowResetConfirm(true)}
-          className="text-sm text-(--foreground) px-3 py-1 rounded border border-red-500 hover:bg-red-800 bg-red-600 hover:border-red-700 transition-colors duration-200"
+          className="rounded-full bg-red-500 text-white hover:bg-red-800 hover:rotate-180 w-10 h-10 flex items-center justify-center transition-transform duration-300"
         >
-          Réinitialiser
+          <RefreshCcw className="w-5 h-5" strokeWidth={3}/>
         </button>
       </div>
       {showResetConfirm && (

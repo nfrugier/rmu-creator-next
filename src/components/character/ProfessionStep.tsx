@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Character } from "@/types/character";
 import type { Profession } from "@/types/profession";
+import { Check } from "lucide-react";
 
 const PROFESSIONS: Profession[] = [
   // Royaume des Armes
@@ -364,7 +365,18 @@ export default function ProfessionStep({
 
   return (
     <div className="text-left space-y-4 text-(--foreground)">
-      <h2 className="text-xl font-bold text-center">Choix de la profession</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold">Choix de la profession</h2>
+        <button
+          onClick={onNext}
+          disabled={!selected}
+          className="w-9 h-9 flex items-center justify-center rounded-full
+                     border-2 border-yellow-500 bg-(--background) text-(--foreground) hover:bg-yellow-700 hover:border-yellow-500
+                     disabled:border-gray-300 disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+        >
+          <Check className="w-5 h-5" strokeWidth={2.5} />
+        </button>
+      </div>
 
       {["Royaume des Armes", "Royaume de la Canalisation", "Royaume de l'Essence", "Royaume du Mentalisme", "Royaumes Hybrides" ].map((realm) => (
         <div key={realm}>
@@ -387,15 +399,6 @@ export default function ProfessionStep({
           </div>
         </div>
       ))}
-      <div className="fixed bottom-1/12 left-1/7 flex flex-col gap-3 z-50 text-center pt-4">
-        <button
-          onClick={onNext}
-          disabled={!selected}
-          className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded disabled:opacity-50"
-        >
-          ✅ Valider et continuer
-        </button>
-      </div>
     </div>
   );
 }
