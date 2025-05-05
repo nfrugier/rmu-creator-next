@@ -1,5 +1,7 @@
 import type { SkillSelection } from "./skills";
 import type { SkillCosts } from "./skills";
+import type { Talent } from "./talents";
+
 
 export type StatBlock = Record<string, number>;
 
@@ -21,5 +23,8 @@ export type Character = {
   availableDP?: number;
   skills?: SkillSelection;
   skillCosts?: SkillCosts;
+  tdp?: number;
+  talents?: Talent[];
+  flaws?: Talent[];
 };
 

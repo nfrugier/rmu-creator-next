@@ -16,7 +16,16 @@ export default function SkillStep({
   setCharacter: (updater: (prev: Character) => Character) => void;
   onNext: () => void;
 }) {
-  const [skills, setSkills] = useState<SkillSelection>(character.skills || {});
+  const skillGroups = Object.keys(character.skillCosts || {});
+  const defaultSkills: SkillSelection = skillGroups.reduce((acc, key) => {
+    acc[key] = 0;
+    return acc;
+  }, {} as SkillSelection);
+
+  const [skills, setSkills] = useState<SkillSelection>({
+  ...defaultSkills,
+  ...(character.skills || {}),
+  });
   const [availableDP, setAvailableDP] = useState<number>(character.availableDP ?? MAX_DP);
 
   useEffect(() => {

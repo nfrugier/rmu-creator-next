@@ -4,10 +4,11 @@ import { useState } from "react";
 import RaceCultureStep from "./RaceCultureStep";
 import StatsStep from "./StatsStep";
 import ProfessionStep from "./ProfessionStep";
+import SkillStep from "./SkillStep";
+import TalentStep from './TalentStep';
 import CharacterSummary from "./CharacterSummary";
 import type { Character } from "@/types/character";
 import ConfirmDialog from "../ui/ConfirmDialog";
-import SkillStep from "./SkillStep";
 import { RefreshCcw, FileDown  } from "lucide-react";
 
 
@@ -16,7 +17,16 @@ const steps = [
   { label: "Caractéristiques", key: "stats" },
   { label: "Profession", key: "profession" },
   { label: "Compétences", key: "skills" },
+  { label: "Talents", key: "telents" },
 ];
+
+function getResumeTitle(name?: string): string {
+  if (!name || name.trim() === "") return "Résumé";
+  const clean = name.trim();
+  const startsWithVowel = /^[aeiouyàâäéèêëîïôöùûü]/i.test(clean);
+  return startsWithVowel ? `Résumé d’${clean}` : `Résumé de ${clean}`;
+}
+
 
 export default function CharacterCreationLayout() {
   const [activeStep, setActiveStep] = useState(0);
@@ -68,7 +78,15 @@ export default function CharacterCreationLayout() {
           <SkillStep
             character={character}
             setCharacter={setCharacter}
-            onNext={() => goToStep(3)}
+            onNext={() => goToStep(4)}
+          />
+        );
+      case 4:
+        return (
+          <TalentStep
+            character={character}
+            setCharacter={setCharacter}
+            onNext={() => goToStep(5)}
           />
         );
       default:
@@ -130,7 +148,7 @@ export default function CharacterCreationLayout() {
 
       {/* Colonne droite : résumé */}
       <div className="flex-2 w-1/3 bg-(--background) rounded-lg p-4 shadow-inner">
-        <h2 className="text-lg font-bold mb-2 text-center">Résumé</h2>
+        <h2 className="text-lg font-bold mb-2 text-center">{getResumeTitle(character.name)}</h2>
         <CharacterSummary character={character} />
       </div>
       {character.race && character.culture && character.stats && character.profession && character.skills && (

@@ -60,6 +60,13 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
     },
   };
 
+  const racialTDP: Record<string, number> = {
+    Humain: 6,
+    Elfe: 5,
+    Nain: 4,
+    Hobbit: 5,
+  };
+
   const isValid = !!character.race && !!character.culture;
 
 
@@ -68,6 +75,7 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
       ...prev,
       race,
       raceModifiers: racialModifiers[race] || {},
+      tdp: racialTDP[race] || 0,
     }));
     console.log(character);
 

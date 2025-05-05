@@ -338,9 +338,6 @@ const PROFESSIONS: Profession[] = [
   },
 ];
 
-
-
-
 export default function ProfessionStep({
   character,
   setCharacter,
