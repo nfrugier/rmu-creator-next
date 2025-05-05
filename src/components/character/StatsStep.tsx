@@ -75,7 +75,7 @@ export default function StatsStep({
   };
 
   return (
-    <div className="text-left space-y-4">
+    <div className="text-left space-y-4 text-(--foreground)">
       <h2 className="text-xl font-bold text-center">Caractéristiques</h2>
 
       {STAT_NAMES.map((stat) => (

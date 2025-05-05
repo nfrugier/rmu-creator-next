@@ -82,8 +82,8 @@ export default function RaceCultureStep({ character, setCharacter, onNext }: {
   };
 
   return (
-    <div>
-      <div className="mb-4">
+    <div className="text-(--foreground)">
+      <div className="mb-4 ">
         <label className="block font-semibold mb-1">Race</label>
         <select
           value={character.race}

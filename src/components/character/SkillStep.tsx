@@ -47,7 +47,7 @@ export default function SkillStep({
   };
 
   return (
-    <div>
+    <div className="text-(--foreground)">
       <h2 className="text-xl font-bold mb-4">Répartition des compétences</h2>
       <p className="mb-2">DP restants : {availableDP}</p>
       <div className="space-y-4">

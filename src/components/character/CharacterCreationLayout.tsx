@@ -99,7 +99,7 @@ export default function CharacterCreationLayout() {
             placeholder="Nom du héros..."
           />
         </div>
-        <div className="flex gap-2 ">
+        <div className="flex gap-2">
           {steps.map((step, i) => (
             <button
               key={step.key}
@@ -115,7 +115,7 @@ export default function CharacterCreationLayout() {
           ))}
         </div>
 
-        <div className="bg-gray-900 text-white rounded-lg p-6 shadow-inner min-h-[300px] w-full">
+        <div className="text-white bg-(--background) rounded-lg p-6 shadow-inner min-h-[300px] w-full">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-10 text-gray-400">
               <div className="animate-spin h-8 w-8 border-4 border-yellow-600 border-t-transparent rounded-full mb-4" />
@@ -129,7 +129,7 @@ export default function CharacterCreationLayout() {
       </div>
 
       {/* Colonne droite : résumé */}
-      <div className="flex-2 w-1/3 bg-gray-800 rounded-lg p-4 shadow-inner">
+      <div className="flex-2 w-1/3 bg-(--background) rounded-lg p-4 shadow-inner">
         <h2 className="text-lg font-bold mb-2 text-center">Résumé</h2>
         <CharacterSummary character={character} />
       </div>

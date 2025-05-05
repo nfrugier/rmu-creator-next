@@ -363,7 +363,7 @@ export default function ProfessionStep({
   };
 
   return (
-    <div className="text-left space-y-4">
+    <div className="text-left space-y-4 text-(--foreground)">
       <h2 className="text-xl font-bold text-center">Choix de la profession</h2>
 
       {["Royaume des Armes", "Royaume de la Canalisation", "Royaume de l'Essence", "Royaume du Mentalisme", "Royaumes Hybrides" ].map((realm) => (
